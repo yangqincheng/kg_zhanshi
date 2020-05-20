@@ -130,6 +130,7 @@ public class KGraphRepository implements IKGraphRepository {
 						nodeSql = String.format("MATCH (m1:`ConceptHyperedge`)-[r1]->(n:Concept)-[r2]->(m2) %s return * limit %s",  cqWhere,
 								query.getPageSize());
 					}
+					// 添加了第三个domain Concept
 					// 下边的查询查不到单个没有关系的节点,考虑要不要左箭头
 					/*String nodeSql = String.format("MATCH (n:`%s`) <-[r]->(m) %s return * limit %s", domain, cqWhere,
 							query.getPageSize());*/
