@@ -114,8 +114,9 @@ public class KGraphRepository implements IKGraphRepository {
 
 					}
 					String test1 = "Hyperedge";
-					String test2 = "ConceptHyperedge";
+					String test2 = "ConHyperedge";
 					String test3 = "Concept";
+					String test4 = "all";
 					String nodeSql;
 					if(domain.equals(test1)){
 //						cqWhere.replace("name","Description");
@@ -123,11 +124,14 @@ public class KGraphRepository implements IKGraphRepository {
 								query.getPageSize());
 					}else if(domain.equals(test2)){
 //						cqWhere.replace("name","description");
-						nodeSql = String.format("MATCH (m1:`%s`)-[r1]->(n:Hyperedge)-[r2]->(m2)<-[r3]-(m3:Concept)<-[r4]-(m1:ConceptHyperedge) %s return * limit %s", domain, cqWhere,
+						nodeSql = String.format("MATCH (m1:`%s`)-[r1]->(n:Hyperedge)-[r2]->(m2)<-[r3]-(m3:Concept)<-[r4]-(m1:ConHyperedge) %s return * limit %s", domain, cqWhere,
 								query.getPageSize());
-						// MATCH (m1:`%s`)-[r1]->(n:Hyperedge)-[r2]->(m2)<-[r3]-(m3:Concept)<-[r4]-(m1:ConceptHyperedge)
-					}else {
-						nodeSql = String.format("MATCH (n:`ConceptHyperedge`)-[r1]->(m1:Concept)-[r2]->(m2) %s return * limit %s",  cqWhere,
+						// MATCH (m1:`%s`)-[r1]->(n:Hyperedge)-[r2]->(m2)<-[r3]-(m3:Concept)<-[r4]-(m1:ConHyperedge)
+					}else if(domain.equals(test3)){
+						nodeSql = String.format("MATCH (n:`ConHyperedge`)-[r1]->(m1:Concept)-[r2]->(m2) %s return * limit %s",  cqWhere,
+								query.getPageSize());
+					}else{
+						nodeSql = String.format("MATCH (n:`ConHyperedge`)-[r1]->(m1:Concept)-[r2]->(m2)  return * limit %s",  
 								query.getPageSize());
 					}
 					// 添加了第三个domain Concept
